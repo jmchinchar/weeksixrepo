@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    <div class="weeksixs" *ngIf="weeksixsList">
+      <table class="table">
+        <thead class="h">
+          <tr class="h">
+            <th class="h">Title</th>
+            <th class="h">Description</th>
+            <th class="h">Date</th>
+            <th class="h">Status</th>
+            <th class="h">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr class="weeksix" (dblclick)="editWeeksix(weeksix)" *ngFor="let weeksix of weeksixsList">
+
+            <td>{{weeksix.title}}</td>
+              <td>{{weeksix.description}}</td>
+              <td>{{weeksix.date | date}}</td>
+              <td>{{weeksix.status}}</td>
+            
+            <td>
+              <button class="btn btn-success" (click)="doneWeeksix(weeksix)">
+                <i  class="fa fa-check"></i>
+              </button>
+              <button class="btn btn-primary" (click)="editWeeksix(weeksix)">
+                  <i  class="fa fa-pencil"></i>
+                </button>
+              <button class="btn btn-danger" (click)="deleteWeeksix(weeksix)">
+                  <i  class="fa fa-trash"></i>
+                </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <form>
+      <div class="form-row">
+
+        <div class="col-md-5">
+          <input type="text" name="title" id="title" [(ngModel)]="newWeeksix.title" placeholder="Title" class="form-control">
+        </div>
+        <div class="col-md-5">
+          <input name="description" id="description" [(ngModel)]="newWeeksix.description" placeholder="Description" class="form-control"
+            id="description">
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-primary" (click)="create()">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-2">
+    
+  </div>
+</div><div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    <div class="weeksixs" *ngIf="weeksixsList">
+      <table class="table">
+        <thead class="h">
+          <tr class="h">
+            <th class="h">Title</th>
+            <th class="h">Description</th>
+            <th class="h">Date</th>
+            <th class="h">Status</th>
+            <th class="h">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="weeksix" (dblclick)="editWeeksix(weeksix)" *ngFor="let weeksix of weeksixsList">
+
+            <ng-container *ngIf="!editWeeksixs.includes(weeksix); else editTD">
+              <td>{{weeksix.title}}</td>
+              <td>{{weeksix.description}}</td>
+              <td>{{weeksix.date | date}}</td>
+              <td>{{weeksix.status}}</td>
+            </ng-container>
+
+            <ng-template #editTD>
+                <td><input type="text" name="title" id="title" (keypress)="submitWeeksix($event, weeksix)" [(ngModel)]="weeksix.title" placeholder="Title" class="form-control"></td>
+                <td><input type="text" name="description" id="description" (keypress)="submitWeeksix($event, weeksix)" [(ngModel)]="weeksix.description" placeholder="Description"
+                    class="form-control"></td>
+                <td>{{weeksix.date | date}}</td>
+                <td>
+                  <input type="text" name="status" id="status" (keypress)="submitWeeksix($event, weeksix)" [(ngModel)]="weeksix.status" placeholder="Status" class="form-control">
+                </td>
+            </ng-template>
+
+            <td class="o">
+              <button class="btn btn-success" (click)="doneWeeksix(weeksix)">
+                <i  class="fa fa-check"></i>
+              </button>
+              <button class="btn btn-primary" (click)="editWeeksix(weeksix)">
+                  <i  class="fa fa-pencil"></i>
+                </button>
+              <button class="btn btn-danger" (click)="deleteWeeksix(weeksix)">
+                  <i  class="fa fa-trash"></i>
+                </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <form>
+      <div class="form-row">
+
+        <div class="col-md-5">
+          <input type="text" name="title" id="title" [(ngModel)]="newWeeksix.title" placeholder="Title" class="form-control">
+        </div>
+        <div class="col-md-5">
+          <input name="description" id="description" [(ngModel)]="newWeeksix.description" placeholder="Description" class="form-control"
+            id="description">
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-primary" (click)="create()">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-2">
+    
+  </div>
+</div>
